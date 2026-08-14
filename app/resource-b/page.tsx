@@ -1,0 +1,1 @@
+import Link from 'next/link'; import ResourceView from '../../components/resource-view'; export default function B(){return <section className="card"><ResourceView resource="b"/><Link href="/dashboard">← 返回控制台</Link></section>}

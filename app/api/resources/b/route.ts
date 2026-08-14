@@ -1,0 +1,1 @@
+import { NextResponse } from 'next/server'; import { getSession } from '../../../../lib/auth'; import { requireResource } from '../../../../lib/authorization'; export async function GET(){const a=requireResource(await getSession(),'B');return a.ok?NextResponse.json({title:'资源 B',content:'这是只对内置特权测试账号开放的 Mock 内容。'}):NextResponse.json({message:a.message},{status:a.status});}

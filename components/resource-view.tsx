@@ -1,0 +1,3 @@
+'use client';
+import { useEffect, useState } from 'react';
+export default function ResourceView({ resource }: { resource: 'a' | 'b' }) { const [state,setState]=useState<{title?:string;content?:string;message?:string;status?:number}>({}); useEffect(()=>{fetch(`/api/resources/${resource}`).then(async r=>setState({...await r.json(),status:r.status})).catch(()=>setState({message:'网络请求失败'}));},[resource]); if(!state.title&&!state.message)return <p>正在检查访问权限…</p>; if(state.message)return <div className="denied"><h2>访问被拒绝</h2><p>{state.message}（HTTP {state.status ?? 500}）</p></div>; return <div className="mock"><p className="eyebrow">MOCK RESOURCE</p><h1>{state.title}</h1><p>{state.content}</p><div className="placeholder">这里是模拟业务数据区域</div></div>; }
